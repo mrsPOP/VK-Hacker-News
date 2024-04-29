@@ -1,41 +1,44 @@
-import { FC } from 'react';
+import { useRouteNavigator } from "@vkontakte/vk-mini-apps-router";
 import {
+  Button,
+  CardGrid,
+  ContentCard,
+  Div,
+  Group,
+  Header,
+  NavIdProps,
   Panel,
   PanelHeader,
-  Header,
-  Button,
-  Group,
-  Cell,
-  Div,
-  Avatar,
-  NavIdProps,
-} from '@vkontakte/vkui';
-import { UserInfo } from '@vkontakte/vk-bridge';
-import { useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
+} from "@vkontakte/vkui";
+import { FC } from "react";
 
 export interface HomeProps extends NavIdProps {
-  fetchedUser?: UserInfo;
+  stories?: Story[] | null;
 }
 
-export const Home: FC<HomeProps> = ({ id, fetchedUser }) => {
-  const { photo_200, city, first_name, last_name } = { ...fetchedUser };
+export const Home: FC<HomeProps> = ({ id, stories }) => {
   const routeNavigator = useRouteNavigator();
-
   return (
     <Panel id={id}>
-      <PanelHeader>Главная</PanelHeader>
-      {fetchedUser && (
-        <Group header={<Header mode="secondary">User Data Fetched with VK Bridge</Header>}>
-          <Cell before={photo_200 && <Avatar src={photo_200} />} subtitle={city?.title}>
-            {`${first_name} ${last_name}`}
-          </Cell>
-        </Group>
-      )}
-
+      <PanelHeader>Hacker News</PanelHeader>
       <Group header={<Header mode="secondary">Navigation Example</Header>}>
+        {stories && stories.map((story) => (
+          <CardGrid key={story.id} size="l">
+            <ContentCard
+              header={story.title}
+              subtitle={story.score}
+              caption={story.descendants}
+            />
+          </CardGrid>
+        ))}
         <Div>
-          <Button stretched size="l" mode="secondary" onClick={() => routeNavigator.push('persik')}>
-            Покажите Персика, пожалуйста!
+          <Button
+            stretched
+            size="l"
+            mode="secondary"
+            onClick={() => routeNavigator.push("persik")}
+          >
+            Обновить
           </Button>
         </Div>
       </Group>
