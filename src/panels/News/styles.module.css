@@ -1,0 +1,8 @@
+.story-item {
+  cursor: pointer;
+  transition: all ease-in-out .5s;
+}
+
+.story-item:hover {
+  background-color: gainsboro;
+}
