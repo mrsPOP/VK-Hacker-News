@@ -1,4 +1,4 @@
-interface Story {
+interface RawStory {
   by: string;
   descendants: number;
   id: number;
@@ -8,4 +8,8 @@ interface Story {
   title: string;
   type: string;
   url: string;
+}
+
+interface Story extends Omit<RawStory, 'time'> {
+  time: string;
 }
