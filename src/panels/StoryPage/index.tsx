@@ -91,7 +91,9 @@ export const StoryPage: FC<NavIdProps> = ({ id }) => {
           </Group>
           <Group
             header={
-              <Header mode="secondary">{`Comments (${story?.kids.length})`}</Header>
+              <Header mode="secondary">{`Comments (${
+                story?.kids ? story?.kids.length : 0
+              })`}</Header>
             }
           >
             {comments &&
