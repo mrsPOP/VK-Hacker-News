@@ -15,10 +15,10 @@ import {
 } from "@vkontakte/vkui";
 import type { FC } from "react";
 import { useEffect, useState } from "react";
-import { getComment, getStory } from "../../api";
-import { formatDate } from "../../utils";
-import { decodeHtmlEntities } from "../../utils/helpers";
-import { Comment } from "../../widgets/Comment";
+import { decodeHtmlEntities, formatDate } from "../../shared/dataFormatters";
+import { getComment } from "../../shared/services/commentService";
+import { getStory } from "../../shared/services/storyService";
+import { Comment } from "../../entities/Comment";
 
 export const StoryPage: FC<NavIdProps> = ({ id }) => {
   const [isLoading, setIsLoading] = useState(true);

@@ -1,8 +1,8 @@
 import { Icon28UserOutline } from "@vkontakte/icons";
 import { Avatar, Caption, RichCell } from "@vkontakte/vkui";
 import { useState, type FC } from "react";
-import { getComment } from "../../api";
-import { decodeHtmlEntities, formatDate } from "../../utils/helpers";
+import { decodeHtmlEntities, formatDate } from "../../shared/dataFormatters";
+import { getComment } from "../../shared/services/commentService";
 import styles from "./styles.module.css";
 
 type Props = {
@@ -61,10 +61,10 @@ export const Comment: FC<Props> = ({ id, by, text, time, kids }) => {
         {by || "Anonym"}
       </RichCell>
       <div className={styles["child-comments-container"]}>
-          {isChildCommentsVisible &&
-            childComments?.map((comment) => (
-              <Comment {...comment} key={comment.id} />
-            ))}
+        {isChildCommentsVisible &&
+          childComments?.map((comment) => (
+            <Comment {...comment} key={comment.id} />
+          ))}
       </div>
     </>
   );

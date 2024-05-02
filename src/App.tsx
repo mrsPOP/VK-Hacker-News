@@ -1,10 +1,10 @@
 import { useActiveVkuiLocation } from "@vkontakte/vk-mini-apps-router";
 import { ScreenSpinner, SplitCol, SplitLayout, View } from "@vkontakte/vkui";
 import { ReactNode, useCallback, useEffect, useRef, useState } from "react";
-import { getStory, getStoryIds } from "./api";
-import { News, StoryPage } from "./panels";
-import { VIEW_PANELS } from "./routes";
-import { formatDate } from "./utils";
+import { getStory, getStoryIds } from "./shared/services/storyService";
+import { News, StoryPage } from "./pages";
+import { VIEW_PANELS } from "./app/routes";
+import { formatDate } from "./shared/dataFormatters";
 
 export const App = () => {
   const { panel: activePanel = VIEW_PANELS.NEWS } = useActiveVkuiLocation();

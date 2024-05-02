@@ -7,8 +7,8 @@ import {
   Panel,
   PanelHeader,
 } from "@vkontakte/vkui";
-import { FC } from "react";
-import StoryItem from "../../widgets/StoryItem";
+import type { FC } from "react";
+import { StoryItem } from "../../entities/StoryItem";
 
 export interface NewsProps extends NavIdProps {
   stories?: Story[] | null;
@@ -20,7 +20,7 @@ export const News: FC<NewsProps> = ({ id, stories, onRefresh }) => {
     <Panel id={id}>
       <PanelHeader>Hacker News</PanelHeader>
       <Div>
-        <Button stretched size="l" mode="secondary" onClick={onRefresh}>
+        <Button stretched size="l" mode="outline" onClick={onRefresh}>
           Update
         </Button>
       </Div>
