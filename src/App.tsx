@@ -1,15 +1,16 @@
-import { useState, useEffect, useCallback, ReactNode } from 'react';
+import { useState, useEffect, useCallback, ReactNode, useRef } from 'react';
 import { useActiveVkuiLocation } from "@vkontakte/vk-mini-apps-router";
 import { ScreenSpinner, SplitCol, SplitLayout, View } from "@vkontakte/vkui";
 import { getStory, getStoryIds } from "./api";
-import { News, Persik } from "./panels";
-import { DEFAULT_VIEW_PANELS } from "./routes";
+import { News, StoryPage } from "./panels";
+import { VIEW_PANELS } from "./routes";
 import { formatDate } from "./utils";
 
 export const App = () => {
-  const { panel: activePanel = DEFAULT_VIEW_PANELS.NEWS } = useActiveVkuiLocation();
+  const { panel: activePanel = VIEW_PANELS.NEWS } = useActiveVkuiLocation();
   const [stories, setStories] = useState<Story[]>([]);
   const [popout, setPopout] = useState<ReactNode | null>(<ScreenSpinner size="large" />);
+  const intervalIdRef = useRef<number | null>(null);
 
   const fetchData = useCallback(async () => {
     setPopout(<ScreenSpinner size="large" />);
@@ -18,7 +19,6 @@ export const App = () => {
       if (ids) {
         const promises = ids.slice(0, 10).map((id) => getStory(id));
         const storiesData = await Promise.all(promises);
-
         const validStories = storiesData.reduce((acc, rawStory) => {
           if (rawStory) {
             const formattedTime = formatDate(rawStory.time);
@@ -36,22 +36,34 @@ export const App = () => {
       console.error(error);
     } finally {
       setPopout(null);
-    }
+    } 
   }, []);
+
+  const resetInterval = useCallback(() => {
+    if (intervalIdRef.current) clearInterval(intervalIdRef.current);
+    intervalIdRef.current = window.setInterval(() => fetchData(), 60 * 1000);
+  }, [fetchData]);
 
   useEffect(() => {
     fetchData();
-    const intervalId = setInterval(fetchData, 60 * 1000);
+    resetInterval();
 
-    return () => clearInterval(intervalId);
-  }, [fetchData]);
+    return () => {
+      if (intervalIdRef.current) clearInterval(intervalIdRef.current);
+    };
+  }, [fetchData, resetInterval]);
+
+  const refreshData = useCallback(() => {
+    fetchData();
+    resetInterval();
+  }, [fetchData, resetInterval]);
 
   return (
     <SplitLayout popout={popout}>
       <SplitCol>
         <View activePanel={activePanel}>
-          <News id="news" stories={stories} onRefresh={fetchData} />
-          <Persik id="story-page" />
+          <News id="news" stories={stories} onRefresh={refreshData} />
+          <StoryPage id="story-page" />
         </View>
       </SplitCol>
     </SplitLayout>
