@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, ReactNode, useRef } from 'react';
+import { useState, useEffect, useCallback, ReactNode, useRef } from "react";
 import { useActiveVkuiLocation } from "@vkontakte/vk-mini-apps-router";
 import { ScreenSpinner, SplitCol, SplitLayout, View } from "@vkontakte/vkui";
 import { getStory, getStoryIds } from "./api";
@@ -9,7 +9,9 @@ import { formatDate } from "./utils";
 export const App = () => {
   const { panel: activePanel = VIEW_PANELS.NEWS } = useActiveVkuiLocation();
   const [stories, setStories] = useState<Story[]>([]);
-  const [popout, setPopout] = useState<ReactNode | null>(<ScreenSpinner size="large" />);
+  const [popout, setPopout] = useState<ReactNode | null>(
+    <ScreenSpinner size="large" />
+  );
   const intervalIdRef = useRef<number | null>(null);
 
   const fetchData = useCallback(async () => {
@@ -17,7 +19,7 @@ export const App = () => {
     try {
       const ids = await getStoryIds();
       if (ids) {
-        const promises = ids.slice(0, 10).map((id) => getStory(id));
+        const promises = ids.slice(0, 100).map((id) => getStory(id));
         const storiesData = await Promise.all(promises);
         const validStories = storiesData.reduce((acc, rawStory) => {
           if (rawStory) {
@@ -36,7 +38,7 @@ export const App = () => {
       console.error(error);
     } finally {
       setPopout(null);
-    } 
+    }
   }, []);
 
   const resetInterval = useCallback(() => {
