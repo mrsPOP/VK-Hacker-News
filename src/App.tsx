@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback, ReactNode, useRef } from "react";
 import { useActiveVkuiLocation } from "@vkontakte/vk-mini-apps-router";
 import { ScreenSpinner, SplitCol, SplitLayout, View } from "@vkontakte/vkui";
+import { ReactNode, useCallback, useEffect, useRef, useState } from "react";
 import { getStory, getStoryIds } from "./api";
 import { News, StoryPage } from "./panels";
 import { VIEW_PANELS } from "./routes";
@@ -21,17 +21,14 @@ export const App = () => {
       if (ids) {
         const promises = ids.slice(0, 100).map((id) => getStory(id));
         const storiesData = await Promise.all(promises);
-        const validStories = storiesData.reduce((acc, rawStory) => {
-          if (rawStory) {
-            const formattedTime = formatDate(rawStory.time);
-            const story: Story = {
-              ...rawStory,
-              time: formattedTime,
-            };
-            acc.push(story);
-          }
-          return acc;
-        }, [] as Story[]);
+        const validStories = storiesData
+          .filter((story): story is RawStory => Boolean(story))
+          .sort((a, b) => b.time - a.time)
+          .map((rawStory) => ({
+            ...rawStory,
+            time: formatDate(rawStory.time),
+          }));
+
         setStories(validStories);
       }
     } catch (error) {
