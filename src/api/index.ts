@@ -19,6 +19,6 @@ export const getStory = async (storyId: number): Promise<RawStory | null> => {
   return fetchData<RawStory>(`${ITEM_URL}${storyId}.json`);
 };
 
-export const getComment = async (commentId: number) => {
+export const getComment = async (commentId: number): Promise<RawComment | null> => {
   return fetchData(`${ITEM_URL}${commentId}.json`);
 };
