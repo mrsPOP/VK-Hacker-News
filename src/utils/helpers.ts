@@ -5,3 +5,9 @@ export const formatDate = (date: number): string => {
   const day = dateObj.getDate().toString().padStart(2, "0");
   return `${day}.${month}.${year}`;
 };
+
+export const decodeHtmlEntities = (text: string) => {
+  const textArea = document.createElement('textarea');
+  textArea.innerHTML = text;
+  return textArea.value;
+}

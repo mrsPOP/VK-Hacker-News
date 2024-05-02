@@ -1,8 +1,5 @@
-import { useRouteNavigator } from "@vkontakte/vk-mini-apps-router";
 import {
   Button,
-  CardGrid,
-  ContentCard,
   Div,
   Group,
   Header,
@@ -11,7 +8,7 @@ import {
   PanelHeader,
 } from "@vkontakte/vkui";
 import { FC } from "react";
-import styles from "./styles.module.css";
+import StoryItem from "../../widgets/StoryItem";
 
 export interface NewsProps extends NavIdProps {
   stories?: Story[] | null;
@@ -19,29 +16,25 @@ export interface NewsProps extends NavIdProps {
 }
 
 export const News: FC<NewsProps> = ({ id, stories, onRefresh }) => {
-  const routeNavigator = useRouteNavigator();
-  const onStoryClick = () => {
-    routeNavigator.push("persik");
-  };
   return (
     <Panel id={id}>
       <PanelHeader>Hacker News</PanelHeader>
       <Div>
         <Button stretched size="l" mode="secondary" onClick={onRefresh}>
-          Обновить
+          Update
         </Button>
       </Div>
-      <Group header={<Header mode="secondary">Navigation Example</Header>}>
+      <Group header={<Header mode="secondary">Latest News</Header>}>
         {stories &&
           stories.map((story) => (
-            <CardGrid key={story.id} size="l" onClick={onStoryClick}>
-              <ContentCard
-                className={styles["story-item"]}
-                header={story.title}
-                subtitle={`${story.by} ${story.time}`}
-                caption={`score: ${story.score}`}
-              />
-            </CardGrid>
+            <StoryItem
+              key={story.id}
+              id={story.id}
+              by={story.by}
+              score={story.score}
+              time={story.time}
+              title={story.title}
+            />
           ))}
       </Group>
     </Panel>
