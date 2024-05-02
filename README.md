@@ -14,13 +14,27 @@
 - Yarn (npm install --global yarn для установки)
 - Git
 
-### Установка зависимостей
+## Инструкция по запуску
+
+### Клонировать репозиторий:
+
+```sh
+git clone https://github.com/mrsPOP/VK-Hacker-News.git
+```
+
+### Перейти в папку проекта:
+
+```sh
+cd VK-Hacker-News
+```
+
+### Установить зависимости:
 
 ```sh
  yarn install
 ```
 
-### Запуск сервера разработки
+### Запустить сервер разработки:
 
 ```sh
  yarn start
