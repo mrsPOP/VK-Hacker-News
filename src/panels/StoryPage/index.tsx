@@ -11,7 +11,7 @@ import {
   PanelHeaderBack,
   ScreenSpinner,
   Spacing,
-  Text
+  Text,
 } from "@vkontakte/vkui";
 import type { FC } from "react";
 import { useEffect, useState } from "react";
@@ -89,7 +89,11 @@ export const StoryPage: FC<NavIdProps> = ({ id }) => {
               <Text>{story?.time}</Text>
             </Div>
           </Group>
-          <Group header={<Header mode="secondary">Comments</Header>}>
+          <Group
+            header={
+              <Header mode="secondary">{`Comments (${story?.kids.length})`}</Header>
+            }
+          >
             {comments &&
               comments.map((comment) => (
                 <Comment
@@ -98,6 +102,7 @@ export const StoryPage: FC<NavIdProps> = ({ id }) => {
                   by={comment.by}
                   text={comment.text}
                   time={comment.time}
+                  kids={comment.kids}
                 />
               ))}
           </Group>
