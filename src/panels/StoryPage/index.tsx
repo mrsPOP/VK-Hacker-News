@@ -1,7 +1,6 @@
-import { Icon24ExternalLinkOutline, Icon28UserOutline } from "@vkontakte/icons";
+import { Icon24ExternalLinkOutline } from "@vkontakte/icons";
 import { useParams, useRouteNavigator } from "@vkontakte/vk-mini-apps-router";
 import {
-  Avatar,
   Div,
   Group,
   Header,
@@ -10,7 +9,6 @@ import {
   Panel,
   PanelHeader,
   PanelHeaderBack,
-  RichCell,
   ScreenSpinner,
   Spacing,
   Text
@@ -20,6 +18,7 @@ import { useEffect, useState } from "react";
 import { getComment, getStory } from "../../api";
 import { formatDate } from "../../utils";
 import { decodeHtmlEntities } from "../../utils/helpers";
+import { Comment } from "../../widgets/Comment";
 
 export const StoryPage: FC<NavIdProps> = ({ id }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -93,23 +92,13 @@ export const StoryPage: FC<NavIdProps> = ({ id }) => {
           <Group header={<Header mode="secondary">Comments</Header>}>
             {comments &&
               comments.map((comment) => (
-                <RichCell
+                <Comment
                   key={comment.id}
-                  before={
-                    <Avatar size={48}>
-                      <Icon28UserOutline
-                        fill="#99A2AD"
-                        width={28}
-                        height={28}
-                      />
-                    </Avatar>
-                  }
+                  id={comment.id}
+                  by={comment.by}
                   text={comment.text}
-                  caption={`Posted on ${comment.time}`}
-                  multiline
-                >
-                  {comment.by || "Anonym"}
-                </RichCell>
+                  time={comment.time}
+                />
               ))}
           </Group>
         </>
