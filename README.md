@@ -1,12 +1,13 @@
-# Мини-приложение на платформе VK Mini Apps | VK Mini App Platform
+# Мини-приложение на платформе VK Mini Apps | 
+# VK Mini App Platform
 
 ## App ID: 51914429
 
 Ссылка на приложение: [https://vk.com/app51914429](https://vk.com/app51914429)
+
 App link: [https://vk.com/app51914429](https://vk.com/app51914429)
 
-## 🚀 Запуск мини приложения
-## 🚀 How to Start the Mini App
+## 🚀 Запуск мини приложения | How to Start the Mini App
 
 ### Предварительные условия
 
@@ -24,32 +25,27 @@ Ensure that your computer has the following software installed:
 - Yarn (Install with npm install --global yarn)
 - Git
 
-## Инструкция по запуску
-## Launch Instructions
+## Инструкция по запуску | Launch Instructions
 
-### Клонировать репозиторий:
-### Clone the Repository:
+### Клонировать репозиторий | Clone the Repository:
 
 ```sh
 git clone https://github.com/mrsPOP/VK-Hacker-News.git
 ```
 
-### Перейти в папку проекта:
-### Go to the Project Folder:
+### Перейти в папку проекта | Go to the Project Folder:
 
 ```sh
 cd VK-Hacker-News
 ```
 
-### Установить зависимости:
-### Install Dependencies:
+### Установить зависимости | Install Dependencies:
 
 ```sh
  yarn install
 ```
 
-### Запустить сервер разработки:
-### Start the Development Server:
+### Запустить сервер разработки | Start the Development Server:
 
 ```sh
  yarn start
