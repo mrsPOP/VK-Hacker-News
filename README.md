@@ -7,20 +7,14 @@
 
 ## 🚀 Запуск мини приложения | How to Start the Mini App
 
-### Предварительные условия
+### Предварительные условия | Prerequisites
 
 Убедитесь, что на вашем компьютере установлены:
-
-- Node.js
-- Yarn (npm install --global yarn для установки)
-- Git
-
-### Prerequisites
 
 Ensure that your computer has the following software installed:
 
 - Node.js
-- Yarn (Install with npm install --global yarn)
+- Yarn (npm install --global yarn для установки)
 - Git
 
 ## Инструкция по запуску | Launch Instructions
@@ -50,9 +44,11 @@ cd VK-Hacker-News
 ```
 
 После запуска, открывайте [http://localhost:3000](http://localhost:3000) для просмотра приложения в режиме разработки.
+
 After starting, open [http://localhost:3000](http://localhost:3000) to view the app in development mode.
 
 Разработан интерфейс, включающий две основные страницы: главную страницу с новостями и страницу отдельной новости.
+
 The interface includes two main pages: a homepage with news and an individual news page.
 
 ### Главная страница
